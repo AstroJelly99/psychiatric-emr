@@ -1,4 +1,4 @@
-# EMR Homemade
+# Phychiatric EMR
 
 An Electronic Medical Record system built for small psychiatric clinics — designed around a single practicing doctor's real workflow rather than a generic hospital EMR feature list.
 
