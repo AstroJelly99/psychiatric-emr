@@ -1,0 +1,162 @@
+name: emr_homemade
+description: "EMR Homemade — rekam medis elektronik psikiatri."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.3+4
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.2
+
+  # Daftar di bawah ini sengaja dijaga hanya berisi package yang benar-benar
+  # di-import di lib/. 16 dependency lain dibuang saat menyiapkan target
+  # Android (fase 1) karena tidak pernah di-import di mana pun: excel, dio,
+  # pretty_dio_logger, chucker_flutter, universal_html, file_picker,
+  # multiselect, multi_dropdown, dropdown_button2, fl_chart, flutter_svg,
+  # awesome_snackbar_content, auto_height_grid_view, primer_progress_bar,
+  # syncfusion_flutter_pdf, syncfusion_flutter_datepicker.
+  #
+  # Yang paling berisiko dari daftar itu adalah file_picker ^6.1.1: versi 6.x
+  # belum mendeklarasikan `namespace`, yang diwajibkan Android Gradle Plugin 8.
+  # Menghapusnya menyelesaikan masalah itu tanpa perlu upgrade package yang
+  # memang tidak dipakai siapa pun.
+  google_fonts: ^6.1.0
+  provider: ^6.0.5
+  intl: ^0.19.0
+  go_router: ^13.2.0
+  loading_animation_widget: ^1.2.0+4
+  shared_preferences: ^2.3.2
+  syncfusion_flutter_charts: ^27.2.3
+  data_table_2: ^2.5.15
+  package_info_plus: ^8.1.0
+  month_year_picker: ^0.4.0+1
+  supabase_flutter: ^2.8.0
+  # Dipakai langsung oleh drug_interaction_provider untuk memanggil OpenFDA.
+  # Sebelumnya hanya ikut sebagai dependency transitif.
+  http: ^1.2.0
+  uuid :
+
+
+
+  # flutter_dotenv: ^5.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # Tool baris perintah (`dart run flutter_launcher_icons`), bukan library yang
+  # di-import kode. Sebelumnya salah tempat di `dependencies`.
+  flutter_launcher_icons: ^0.14.1
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^3.0.1
+  print_remover: ^1.0.1
+
+# Konfigurasi ikon peluncur. Dijalankan manual, bukan saat build:
+#   dart run flutter_launcher_icons
+# Perintah itu menimpa android/app/src/main/res/mipmap-*/ic_launcher.png.
+flutter_launcher_icons:
+  # Branch ini khusus Android; platform lain sengaja dimatikan supaya
+  # generator tidak menulis ke folder yang tidak dipakai.
+  android: "ic_launcher"
+  ios: false
+  web:
+    generate: false
+  windows:
+    generate: false
+  macos:
+    generate: false
+
+  image_path: "assets/icon/logo.png"
+
+  # Ikon adaptif Android 8+ SENGAJA tidak dipakai.
+  #
+  # Adaptive icon memotong ±25% tiap tepi lapisan depannya. logo.png ini
+  # gambar penuh tanpa ruang kosong di pinggir, jadi memakainya sebagai
+  # foreground akan memotong bagian tepi logo di sebagian HP. Tanpa blok
+  # adaptive, Android tetap menampilkan ikon dengan benar — sistem yang
+  # membingkainya sendiri, tanpa memotong isinya.
+  #
+  # Kalau nanti dibuat versi berpadding (logo di tengah, hanya mengisi ±60%
+  # kanvas), hidupkan kembali dua baris ini:
+  #   adaptive_icon_background: "#FFFFFF"
+  #   adaptive_icon_foreground: "assets/icon/logo_foreground.png"
+
+  min_sdk_android: 21
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # Didaftarkan supaya logo yang sama juga bisa dipakai DI DALAM aplikasi
+  # (layar login, app bar), bukan hanya jadi ikon peluncur. Yang didaftarkan
+  # foldernya, jadi menambah file baru di sana tidak perlu mengubah baris ini.
+  assets:
+    - assets/icon/
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages

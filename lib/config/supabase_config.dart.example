@@ -1,0 +1,16 @@
+/// Template untuk lib/config/supabase_config.dart.
+///
+/// File aslinya di-gitignore, jadi setelah clone: salin file ini menjadi
+/// `supabase_config.dart` di folder yang sama, lalu isi kedua konstanta dari
+/// Supabase Dashboard > Project Settings > API.
+///
+/// Isi `anonKey` dengan anon/public key — JANGAN service_role key, karena
+/// service_role melewati Row Level Security sepenuhnya dan file ini ikut
+/// ter-bundle ke dalam .exe yang didistribusi ke komputer klinik.
+class SupabaseConfig {
+  const SupabaseConfig._();
+
+  static const String url = 'https://<project-ref>.supabase.co';
+
+  static const String anonKey = '<anon-key>';
+}
